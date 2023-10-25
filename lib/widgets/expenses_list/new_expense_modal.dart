@@ -34,6 +34,59 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
     );
   }
 
+  void _handleSubmit() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null ||
+        _selectedCategory == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          actionsAlignment: MainAxisAlignment.center,
+          icon: const Icon(Icons.error),
+          surfaceTintColor: Theme.of(context).colorScheme.error,
+          iconColor: Theme.of(context).colorScheme.error,
+          title: const Text("Invalid input"),
+          content: const Text(
+              "Please make sure a vald title, amount, date and category are set"),
+          actions: [
+            TextButton(
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text(
+                "Ok",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+    final String title = _titleController.text;
+    final double amount = double.parse(_amountController.text);
+    final DateTime date = _selectedDate ?? DateTime.now();
+    final Category category = _selectedCategory ?? Category.other;
+
+    final Expense newExpense = Expense(
+      title: title,
+      amount: amount,
+      date: date,
+      category: category,
+    );
+
+    Navigator.of(context).pop(newExpense);
+  }
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -52,92 +105,87 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
             maxLength: 50,
             controller: _titleController,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: const InputDecoration(
-                      labelText: "Amount",
-                      prefixText: "£ ",
-                      helperText: "Amount in GBP"),
-                  keyboardType: TextInputType.number,
-                  controller: _amountController,
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton.icon(
-                      onPressed: _showDatePicker,
-                      icon: const Icon(Icons.calendar_month_outlined),
-                      label: Text(
-                        style: TextStyle(
-                          color: Colors.grey[700],
-                        ),
-                        _selectedDate == null
-                            ? "No date chosen"
-                            : formatter.format(_selectedDate!),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          TextField(
+            decoration: const InputDecoration(
+                labelText: "Amount",
+                prefixText: "£ ",
+                helperText: "Amount in GBP"),
+            keyboardType: TextInputType.number,
+            controller: _amountController,
           ),
-          Row(
-            children: [
-              DropdownButton<Category>(
-                value: _selectedCategory,
-                onChanged: (Category? newValue) {
-                  if (newValue == null) {
-                    return;
-                  }
-                  setState(() {
-                    _selectedCategory = newValue;
-                  });
-                },
-                items: Category.values.map(
-                  (Category category) {
-                    return DropdownMenuItem<Category>(
-                      value: category,
-                      child: Text(
-                        category.name.toUpperCase(),
-                      ),
-                    );
-                  },
-                ).toList(),
-              ),
-            ],
+          const SizedBox(
+            height: 16,
           ),
+          _buildCategoryAndDatePicker(),
           const Spacer(),
-          Row(
-            children: [
-              TextButton.icon(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                label: const Text("Cancel"),
-                icon: const Icon(Icons.cancel_outlined),
-              ),
-              const Spacer(),
-              ElevatedButton.icon(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-                  print(_selectedDate);
-                  print(_selectedCategory);
-                },
-                icon: const Icon(Icons.save),
-                label: const Text("Save"),
-              ),
-            ],
-          )
+          _buildButtonRow(),
         ],
       ),
+    );
+  }
+
+  Widget _buildCategoryAndDatePicker() {
+    return Row(
+      children: [
+        DropdownButton<Category>(
+          value: _selectedCategory,
+          onChanged: (Category? newValue) {
+            if (newValue == null) {
+              return;
+            }
+            setState(() {
+              _selectedCategory = newValue;
+            });
+          },
+          items: Category.values.map((Category category) {
+            return DropdownMenuItem<Category>(
+              value: category,
+              child: Text(
+                category.name.toUpperCase(),
+              ),
+            );
+          }).toList(),
+        ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton.icon(
+                onPressed: _showDatePicker,
+                icon: const Icon(Icons.calendar_month_outlined),
+                label: Text(
+                  _selectedDate == null
+                      ? "No date chosen"
+                      : formatter.format(_selectedDate!),
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildButtonRow() {
+    return Row(
+      children: [
+        TextButton.icon(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          label: const Text("Cancel"),
+          icon: const Icon(Icons.cancel_outlined),
+        ),
+        const Spacer(),
+        ElevatedButton.icon(
+          onPressed: _handleSubmit,
+          icon: const Icon(Icons.save),
+          label: const Text("Save"),
+        ),
+      ],
     );
   }
 }
