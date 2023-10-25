@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_expense_tracker/screens/screens.dart';
+import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Expense Tracker",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
