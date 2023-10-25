@@ -12,6 +12,7 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
   DateTime? _selectedDate;
+  Category? _selectedCategory = Category.other;
 
   void _showDatePicker() async {
     final DateTime now = DateTime.now();
@@ -84,7 +85,32 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
                     ),
                   ],
                 ),
-              )
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              DropdownButton<Category>(
+                value: _selectedCategory,
+                onChanged: (Category? newValue) {
+                  if (newValue == null) {
+                    return;
+                  }
+                  setState(() {
+                    _selectedCategory = newValue;
+                  });
+                },
+                items: Category.values.map(
+                  (Category category) {
+                    return DropdownMenuItem<Category>(
+                      value: category,
+                      child: Text(
+                        category.name.toUpperCase(),
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
             ],
           ),
           const Spacer(),
@@ -102,6 +128,8 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
                 onPressed: () {
                   print(_titleController.text);
                   print(_amountController.text);
+                  print(_selectedDate);
+                  print(_selectedCategory);
                 },
                 icon: const Icon(Icons.save),
                 label: const Text("Save"),
