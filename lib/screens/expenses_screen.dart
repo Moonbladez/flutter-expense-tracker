@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
+import 'package:flutter_expense_tracker/widgets/widgets.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({super.key});
@@ -9,7 +10,7 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
-  final List<Expense> _registereExpenses = [
+  final List<Expense> _registeredExpenses = [
     Expense(
       title: "Flutter Course",
       amount: 19.99,
@@ -17,13 +18,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       category: Category.other,
     ),
     Expense(
-      title: "New Shirt",
-      amount: 39.99,
-      date: DateTime.now(),
-      category: Category.clothes,
-    ),
-    Expense(
-      title: 'Dinner',
+      title: "Dinner",
       amount: 15.99,
       date: DateTime.now(),
       category: Category.food,
@@ -44,10 +39,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text('Expenses'),
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Text("Chart"),
-          Text("Expenses List"),
+          const Text("Chart"),
+          Expanded(
+            child: ExpensesList(expenses: _registeredExpenses),
+          ),
         ],
       ),
     );
