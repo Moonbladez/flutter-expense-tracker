@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expense_tracker/models/expense.dart';
 
 class NewExpenseModal extends StatefulWidget {
   const NewExpenseModal({super.key});
@@ -10,6 +11,27 @@ class NewExpenseModal extends StatefulWidget {
 class _NewExpenseModalState extends State<NewExpenseModal> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  DateTime? _selectedDate;
+
+  void _showDatePicker() async {
+    final DateTime now = DateTime.now();
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: now.subtract(
+        const Duration(days: 365),
+      ),
+      lastDate: now,
+    );
+
+    setState(
+      () {
+        if (pickedDate != null) {
+          _selectedDate = pickedDate;
+        }
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -29,18 +51,43 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
             maxLength: 50,
             controller: _titleController,
           ),
-          TextField(
-            decoration: const InputDecoration(
-                labelText: "Amount",
-                prefixText: "£ ",
-                helperText: "Amount in GBP"),
-            keyboardType: TextInputType.number,
-            controller: _amountController,
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  decoration: const InputDecoration(
+                      labelText: "Amount",
+                      prefixText: "£ ",
+                      helperText: "Amount in GBP"),
+                  keyboardType: TextInputType.number,
+                  controller: _amountController,
+                ),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton.icon(
+                      onPressed: _showDatePicker,
+                      icon: const Icon(Icons.calendar_month_outlined),
+                      label: Text(
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                        ),
+                        _selectedDate == null
+                            ? "No date chosen"
+                            : formatter.format(_selectedDate!),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          const TextField(
-            decoration: InputDecoration(labelText: "Date"),
-            keyboardType: TextInputType.datetime,
-          ),
+          const Spacer(),
           Row(
             children: [
               TextButton.icon(

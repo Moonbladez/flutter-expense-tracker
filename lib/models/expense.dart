@@ -17,13 +17,13 @@ enum Category {
 }
 
 const categoryItems = {
-  Category.food: Icons.fastfood,
+  Category.food: Icons.fastfood_sharp,
   Category.bills: Icons.receipt,
   Category.clothes: Icons.shopping_bag,
   Category.entertainment: Icons.movie,
-  Category.transportation: Icons.car_rental,
+  Category.transportation: Icons.car_rental_sharp,
   Category.health: Icons.medical_services,
-  Category.other: Icons.more_horiz,
+  Category.other: Icons.more,
 };
 
 class Expense {
