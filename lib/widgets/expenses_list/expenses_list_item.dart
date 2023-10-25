@@ -17,16 +17,8 @@ class ExpensesListItem extends StatelessWidget {
               size: 20,
               color: Theme.of(context).colorScheme.onSecondaryContainer),
         ),
-        subtitle: Row(
-          children: [
-            Icon(Icons.calendar_today,
-                size: 16,
-                color: Theme.of(context).colorScheme.onPrimaryContainer),
-            const SizedBox(width: 4),
-            Text(
-              expense.formattedDate,
-            ),
-          ],
+        subtitle: Text(
+          expense.formattedDate,
         ),
         title: Text(expense.title),
         trailing: Text("£${expense.amount.toStringAsFixed(2)}"),

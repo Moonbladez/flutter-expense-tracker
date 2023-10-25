@@ -22,22 +22,29 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       amount: 15.99,
       date: DateTime.now(),
       category: Category.food,
-    ),
+    )
   ];
+
+  void _openAddExpenseModal() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const Text("This is a modal"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
-            splashRadius: 20,
+            onPressed: _openAddExpenseModal,
             icon: const Icon(Icons.add),
-          ),
+          )
         ],
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Expenses'),
+        title: const Text('Expense Tracker'),
       ),
       body: Column(
         children: [
