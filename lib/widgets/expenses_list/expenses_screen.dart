@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
 import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_list.dart';
+import 'package:flutter_expense_tracker/widgets/expenses_list/new_expense_modal.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({super.key});
@@ -28,7 +29,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   void _openAddExpenseModal() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const Text("This is a modal"),
+      builder: (ctx) => const NewExpenseModal(),
     );
   }
 
