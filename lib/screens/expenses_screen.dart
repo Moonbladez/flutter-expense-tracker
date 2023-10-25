@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expense_tracker/models/expense.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({super.key});
@@ -8,6 +9,26 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
+  final List<Expense> _registereExpenses = [
+    Expense(
+      title: "Flutter Course",
+      amount: 19.99,
+      date: DateTime.now(),
+      category: Category.other,
+    ),
+    Expense(
+      title: "New Shirt",
+      amount: 39.99,
+      date: DateTime.now(),
+      category: Category.clothes,
+    ),
+    Expense(
+      title: 'Dinner',
+      amount: 15.99,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +36,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            splashRadius: 24,
+            splashRadius: 20,
             icon: const Icon(Icons.add),
           ),
         ],
