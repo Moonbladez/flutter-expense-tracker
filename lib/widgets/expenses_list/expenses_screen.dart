@@ -60,6 +60,31 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.warning,
+            color: Theme.of(context).colorScheme.error,
+            size: 50,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Text(
+            "No expenses added yet",
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+          expenses: _registeredExpenses, onDeleteExpense: _deleteExpense);
+    }
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -76,8 +101,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         children: [
           const Text("Chart"),
           Expanded(
-            child: ExpensesList(
-                expenses: _registeredExpenses, onDeleteExpense: _deleteExpense),
+            child: mainContent,
           ),
         ],
       ),
