@@ -50,11 +50,34 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     );
   }
 
-  void _deleteExpense(String id) {
+  void _deleteExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(
       () {
-        _registeredExpenses.removeWhere((expense) => expense.id == id);
+        _registeredExpenses.remove((expense));
       },
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+        ),
+        action: SnackBarAction(
+          label: "Undo",
+          onPressed: () {
+            setState(
+              () {
+                _registeredExpenses.insert(expenseIndex, expense);
+              },
+            );
+          },
+        ),
+        content: const Text("Expense deleted"),
+      ),
     );
   }
 
@@ -82,7 +105,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
-          expenses: _registeredExpenses, onDeleteExpense: _deleteExpense);
+        expenses: _registeredExpenses,
+        onDeleteExpense: _deleteExpense,
+      );
     }
 
     return Scaffold(
