@@ -80,7 +80,7 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 32),
       child: Column(
         children: [
           TextField(

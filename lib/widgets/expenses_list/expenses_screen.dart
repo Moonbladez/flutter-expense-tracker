@@ -35,6 +35,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   void _openAddExpenseModal() {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (ctx) => NewExpenseModal(
         onAddExpense: _addExpense,
       ),
@@ -42,9 +43,19 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 
   void _addExpense(Expense expense) {
-    setState(() {
-      _registeredExpenses.add(expense);
-    });
+    setState(
+      () {
+        _registeredExpenses.add(expense);
+      },
+    );
+  }
+
+  void _deleteExpense(String id) {
+    setState(
+      () {
+        _registeredExpenses.removeWhere((expense) => expense.id == id);
+      },
+    );
   }
 
   @override
@@ -65,7 +76,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         children: [
           const Text("Chart"),
           Expanded(
-            child: ExpensesList(expenses: _registeredExpenses),
+            child: ExpensesList(
+                expenses: _registeredExpenses, onDeleteExpense: _deleteExpense),
           ),
         ],
       ),
