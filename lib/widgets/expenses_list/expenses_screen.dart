@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
+import 'package:flutter_expense_tracker/theme.dart';
 import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:flutter_expense_tracker/widgets/expenses_list/new_expense_modal.dart';
 
@@ -58,6 +59,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       },
     );
 
+    ScaffoldMessenger.of(context).clearSnackBars();
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         shape: const RoundedRectangleBorder(
@@ -89,7 +92,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         children: [
           Icon(
             Icons.warning,
-            color: Theme.of(context).colorScheme.error,
+            color: kColorScheme.error,
             size: 50,
           ),
           const SizedBox(
@@ -118,8 +121,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
             icon: const Icon(Icons.add),
           )
         ],
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         title: const Text('Expense Tracker'),
       ),
       body: Column(

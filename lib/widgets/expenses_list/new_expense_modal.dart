@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
+import 'package:flutter_expense_tracker/theme.dart';
 
 class NewExpenseModal extends StatefulWidget {
   const NewExpenseModal({super.key, required this.onAddExpense});
@@ -178,8 +179,8 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
       builder: (ctx) => AlertDialog(
         actionsAlignment: MainAxisAlignment.center,
         icon: const Icon(Icons.error),
-        surfaceTintColor: Theme.of(context).colorScheme.error,
-        iconColor: Theme.of(context).colorScheme.error,
+        surfaceTintColor: kColorScheme.error,
+        iconColor: kColorScheme.error,
         title: const Text("Invalid input"),
         content: const Text(
             "Please make sure a vald title, amount, date and category are set"),
@@ -194,7 +195,7 @@ class _NewExpenseModalState extends State<NewExpenseModal> {
             child: Text(
               "Ok",
               style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
+                color: kColorScheme.error,
               ),
             ),
           ),

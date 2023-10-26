@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
+import 'package:flutter_expense_tracker/theme.dart';
 
 class ExpensesListItem extends StatelessWidget {
   const ExpensesListItem({super.key, required this.expense});
@@ -12,10 +13,9 @@ class ExpensesListItem extends StatelessWidget {
       child: ListTile(
         dense: true,
         leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          backgroundColor: kColorScheme.secondaryContainer,
           child: Icon(expense.icon,
-              size: 20,
-              color: Theme.of(context).colorScheme.onSecondaryContainer),
+              size: 20, color: kColorScheme.onSecondaryContainer),
         ),
         subtitle: Text(
           expense.formattedDate,

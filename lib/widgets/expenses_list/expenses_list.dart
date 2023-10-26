@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
+import 'package:flutter_expense_tracker/theme.dart';
 import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_list_item.dart';
 
 class ExpensesList extends StatelessWidget {
@@ -21,15 +22,13 @@ class ExpensesList extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Icon(Icons.delete,
-                    color: Theme.of(context).colorScheme.onError),
+                Icon(Icons.delete, color: kColorScheme.onError),
                 const SizedBox(
                   width: 8.0,
                 ),
                 Text(
                   'Move to trash',
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.onError),
+                  style: TextStyle(color: kColorScheme.onError),
                 ),
               ],
             ),
