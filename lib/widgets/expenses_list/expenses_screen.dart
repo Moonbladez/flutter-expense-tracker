@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
 import 'package:flutter_expense_tracker/theme.dart';
-import 'package:flutter_expense_tracker/widgets/chart/chart.dart';
-import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_list.dart';
-import 'package:flutter_expense_tracker/widgets/expenses_list/new_expense_modal.dart';
+import 'package:flutter_expense_tracker/widgets/widgets.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({super.key});
@@ -36,6 +34,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   void _openAddExpenseModal() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (ctx) => NewExpenseModal(
@@ -87,6 +86,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+
     Widget mainContent = Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -124,14 +125,25 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         ],
         title: const Text('Expense Tracker'),
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: width > 600
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(flex: 2, child: Chart(expenses: _registeredExpenses)),
+                Expanded(
+                  flex: 3,
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            ),
     );
   }
 }
