@@ -11,7 +11,7 @@
 | <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/df2ebce6-cfb7-442a-92d4-9632baebdf6f" height="500"> | <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/02ee9c38-a482-4af4-90a4-694522553f08" height="500"> | <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/19c7898c-e3eb-49cf-ab72-67c74a3bfad3" height="500">
 
 
-| Front Screen  |
+| Validation  |
 | ------------- | 
 | <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/19c7898c-e3eb-49cf-ab72-67c74a3bfad3" height="500"> |
 
