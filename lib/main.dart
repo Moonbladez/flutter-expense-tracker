@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: "Expense Tracker",
       debugShowCheckedModeBanner: false,
       theme: theme,
-      darkTheme: ThemeData.dark().copyWith(useMaterial3: true),
+      darkTheme: darkTheme,
       home: const ExpensesScreen(),
+      themeMode: ThemeMode.system,
     );
   }
 }

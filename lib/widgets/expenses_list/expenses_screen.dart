@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/models/expense.dart';
 import 'package:flutter_expense_tracker/theme.dart';
+import 'package:flutter_expense_tracker/widgets/chart/chart.dart';
 import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:flutter_expense_tracker/widgets/expenses_list/new_expense_modal.dart';
 
@@ -125,7 +126,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       ),
       body: Column(
         children: [
-          const Text("Chart"),
+          Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),

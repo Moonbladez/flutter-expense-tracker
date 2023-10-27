@@ -43,3 +43,20 @@ class Expense {
   get icon => categoryItems[category];
   String get formattedDate => formatter.format(date);
 }
+
+class ExpenseBucket {
+  ExpenseBucket({required this.category, required this.expenses});
+
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+      : expenses = allExpenses
+            .where((expense) => expense.category == category)
+            .toList();
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses => expenses.fold(
+        0,
+        (previousValue, expense) => previousValue + expense.amount,
+      );
+}

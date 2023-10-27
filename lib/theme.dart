@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 ColorScheme kColorScheme = ColorScheme.fromSeed(seedColor: Colors.cyan);
-ColorScheme kDarkColorScheme = ColorScheme.fromSeed(seedColor: Colors.black12);
+ColorScheme kDarkColorScheme =
+    ColorScheme.fromSeed(seedColor: Colors.cyan, brightness: Brightness.dark);
 
 ThemeData theme = ThemeData(
   colorScheme: kColorScheme,
@@ -26,6 +27,17 @@ ThemeData theme = ThemeData(
     titleLarge: const TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
+    ),
+  ),
+);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  useMaterial3: true,
+  colorScheme: kDarkColorScheme,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      foregroundColor: kDarkColorScheme.onPrimary,
+      backgroundColor: kDarkColorScheme.primary,
     ),
   ),
 );
