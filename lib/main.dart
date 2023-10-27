@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/theme.dart';
-import 'package:flutter_expense_tracker/widgets/expenses_list/expenses_screen.dart';
+import 'package:flutter_expense_tracker/widgets/widgets.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
