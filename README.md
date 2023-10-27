@@ -1,16 +1,14 @@
-# flutter_expense_tracker
+# Flutter Expense Tracker
+<p>Simple expense tracker made using Flutter</p>
+<p>Dark mode styles</p>
 
-A new Flutter project.
+## Technolgies
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 
-## Getting Started
+## Screenshots
+| Front Screen  | Add New Expense Modal | Validation
+| ------------- | ------------- | ------------- |
+| <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/df2ebce6-cfb7-442a-92d4-9632baebdf6f" height="500"> | <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/02ee9c38-a482-4af4-90a4-694522553f08" height="500"> | <img src="https://github.com/Moonbladez/flutter-expense-tracker/assets/53820853/19c7898c-e3eb-49cf-ab72-67c74a3bfad3" height="500">
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
